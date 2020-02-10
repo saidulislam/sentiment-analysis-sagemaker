@@ -85,10 +85,11 @@ def predict_fn(input_data, model):
 
     # Compute the result of applying the model to the input data. The variable `result` should
     # be a numpy array which contains a single integer which is either 1 or 0
-
     with torch.no_grad():
         output = model.forward(data)
+        output = output.to('cpu')
         
     result = np.round(output.numpy())
-
+    result = int(result)
+    
     return result
